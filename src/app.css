@@ -1,0 +1,68 @@
+body {
+  margin: 2.5rem 6rem 2.5rem 6rem;
+}
+
+h1 {
+  font-size: inherit;
+}
+
+p {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.border1 {
+  border: 1px solid #000000;
+}
+
+.container {
+  padding: 0.25rem;
+}
+
+.subContainer {
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.contentFF {
+  width: 12rem;
+  text-align: right;
+}
+
+.contentData {
+  width: 15rem;
+  height: auto;
+  margin-left: 0.25rem;
+  border-bottom: 1px solid #000000;
+}
+
+.marginB3 {
+  margin-bottom: 0.75rem;
+}
+
+.mx24 {
+  margin: 0 6rem 0 6rem;
+}
+
+.w50 {
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0 !important;
+  border-collapse: collapse !important;
+}
+
+.tituloTabla {
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  height: 4rem;
+}
+
+.wColumna {
+  width: 14rem;
+}

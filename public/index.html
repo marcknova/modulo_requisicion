@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../public/css/style.css">
+  <link rel="stylesheet" href="../public/css/style2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body class="bg-white">
+  <header class="bg-green-600">
+    <div class="h-20 p-3 max-w-lg">
+      <img class="h-full ml-5" src="../public/img/logo.png" alt="">
+    </div>
+  </header>
+  <div class="text-center p-3 text-4xl my-10 font-bold">
+    <h1>Modulo de Requisiciones</h1>
+  </div>
+  <section>
+    <div class="flex my-10 mx-44 sombra">
+      <div class="w-4/11 h-full">
+        <img class="w-full h-screen" src="../public/img/1393679.jpg" alt="">
+      </div>
+      <div class="w-1/2">
+        <div class="my-8">
+
+          <form class="ml-10 -mr-7" id="formulario">
+            <div class="containerData">
+              <div class="grid grid-rows-2 grid-cols-2">
+                <div class="w-4/5" id="grupo_name">
+                  <label for="name"></label>
+                  <input 
+                  type="text" 
+                  id="i_name" 
+                  class="input outline-none" 
+                  placeholder="Nombre del solicitante" 
+                  name="name" 
+                  autocomplete="off">
+                  <p class="i_error text-xs my-2 input-error">El nombre solo puede contener letras.</p>
+                </div>
+                <div class="w-4/5" id="grupo_date">
+                  <label for="date"></label>
+                  <input 
+                  type="text" 
+                  id="i_date" 
+                  class="input outline-none" 
+                  placeholder="Fecha de Solicitud" 
+                  name="date" 
+                  autocomplete="off">
+                </div>
+                <div class="w-4/5" id="grupo_phone">
+                  <label for="phone"></label>
+                  <input 
+                  type="text" 
+                  id="i_phone" 
+                  class="input 
+                  outline-none"
+                  placeholder="Celular" 
+                  name="phone" 
+                  autocomplete="off">
+                  <p class="i_error text-xs my-2 input-error">El telefono solo puede contener numeros y el maximo son 14 dígitos.</p>
+                </div>
+                <div class="w-4/5" id="grupo_extension">
+                  <label for="extension"></label>
+                  <input 
+                  type="text" 
+                  id="i_extension" 
+                  class="input outline-none" 
+                  placeholder="Extension" 
+                  name="extension" 
+                  autocomplete="off">
+                </div>
+              </div>
+
+              <div class="department" id="grupo_department">
+                <label for="department"></label>
+                <input 
+                type="text" 
+                id="i_department" 
+                class="input outline-none" 
+                placeholder="Departamento" 
+                name="department" 
+                autocomplete="off">
+                <p class="i_error text-xs my-2 input-error">El departamento solo puede contener letras.</p>
+              </div>
+              <div class="email" id="grupo_email">
+                <label for="email"></label>
+                <input 
+                type="text" 
+                id="i_email" 
+                class="input outline-none" 
+                placeholder="Correo Electronico" 
+                name="email" 
+                autocomplete="off">
+                <p class="i_error text-xs my-2 input-error">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
+              </div>
+              <div class="position" id="grupo_position">
+                <label for="position"></label>
+                <input 
+                type="text" 
+                id="i_position" 
+                class="input outline-none" 
+                placeholder="Puesto" 
+                name="position" 
+                autocomplete="off">
+                <p class="i_error text-xs my-2 input-error">El puesto solo puede contener letras.</p>
+              </div>
+            </div>
+            <div>
+              TABLA DE PRODUCTOS
+            </div>
+            <div class="my-5">
+              <button type="submit" class="border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="insertar">Solicitar</button>
+              <p class="font-semibold bg-green-500 text-center text-white h-10 p-2 my-3 hidden" id="mensaje_exito">Solicitud Enviada Correctamente</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="./main.js"></script>
+</body>
+
+</html>
