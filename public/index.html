@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,14 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../public/css/style.css">
   <link rel="stylesheet" href="../public/css/style2.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <title>Document</title>
 </head>
 
 <body class="bg-white">
-  <header class="bg-green-600">
-    <div class="h-20 p-3 max-w-lg">
-      <img class="h-full ml-5" src="../public/img/logo.png" alt="">
+  <header class="bg-sky-400 shadow">
+    <div class="flex">
+      <div class="h-20 p-3 w-1/2">
+        <img class="h-full ml-5" src="../public/img/logo.png" alt="">
+      </div>
+      <div class="w-1/2">
+        <a href="../src/php/requisitionP.php" class="p-1 mt-4 mr-10 float-right">
+          <button type="button" class="text-white rounded-xl font-semibold text-lg border-1 border-white hover:bg-white hover:text-black  w-52 h-10">Solicitudes realizadas</button> 
+        </a>
+      </div>
     </div>
   </header>
   <div class="text-center p-3 text-4xl my-10 font-bold">
@@ -28,7 +33,6 @@
       </div>
       <div class="w-1/2">
         <div class="my-8">
-
           <form class="ml-10 -mr-7" id="formulario">
             <div class="containerData">
               <div class="grid grid-rows-2 grid-cols-2">
@@ -46,12 +50,13 @@
                 <div class="w-4/5" id="grupo_date">
                   <label for="date"></label>
                   <input 
-                  type="text" 
+                  type="date" 
                   id="i_date" 
                   class="input outline-none" 
                   placeholder="Fecha de Solicitud" 
                   name="date" 
                   autocomplete="off">
+                  <p class="i_error text-xs my-2 input-error">Favor de ingresar una fecha</p>
                 </div>
                 <div class="w-4/5" id="grupo_phone">
                   <label for="phone"></label>
@@ -74,9 +79,9 @@
                   placeholder="Extension" 
                   name="extension" 
                   autocomplete="off">
+                  <p class="i_error text-xs my-2 input-error">La extension solo puede contener numeros</p>
                 </div>
               </div>
-
               <div class="department" id="grupo_department">
                 <label for="department"></label>
                 <input 
@@ -111,11 +116,54 @@
                 <p class="i_error text-xs my-2 input-error">El puesto solo puede contener letras.</p>
               </div>
             </div>
-            <div>
-              TABLA DE PRODUCTOS
-            </div>
+            <!-- <div class="containerTable">
+              <div>
+                <h1 class="font-semibold">Tabla de productos</h1>
+              </div>
+              <div class="containerInput">
+                <div class="flex mt-4">
+                  <div class="w-1/4 mr-3 text-center" id="grupo_total">
+                    <label for="total">Cantidad</label>
+                    <input 
+                    type="text" 
+                    id="i_total" 
+                    class="input2 outline-none text-center mt-2 num"  
+                    name="total" 
+                    placeholder="0"
+                    autocomplete="off">
+                    <p class="i_error text-xs my-2 input-error">Solo numeros</p>
+                  </div>
+                  <div class="w-1/4 mr-3 text-center" id="grupo_unidad">
+                    <label for="unidad">Unidad</label>
+                    <input 
+                    type="text" 
+                    id="i_unidad" 
+                    class="input2 outline-none text-center mt-2 num" 
+                    placeholder="pieza" 
+                    name="unidad" 
+                    autocomplete="off">
+                    <p class="i_error text-xs my-2 input-error">El nombre solo puede contener letras.</p>
+                  </div>
+                  <div class="w-4/5 text-center" id="grupo_description">
+                    <label for="description">Description</label>
+                    <input 
+                    type="text" 
+                    id="i_description" 
+                    class="input2 outline-none mt-2 num" 
+                    placeholder="Descripcion de cada articulo" 
+                    name="description" 
+                    autocomplete="off">
+                    <p class="i_error text-xs my-2 input-error">El nombre solo puede contener letras.</p>
+                  </div>
+                </div>
+                <div>
+                  <button type="button" class="border-1 border-black rounded-lg w-20 h-9 font-semibold float-right hover:text-white hover:bg-black hover:border-0" onclick="Capturar()" >Agregar</button>
+                </div>
+              </div>
+              <div class="productos" id="productos"></div>
+            </div> -->
             <div class="my-5">
-              <button type="submit" class="border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="insertar">Solicitar</button>
+              <button type="submit" class="border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="insertar" id="boton" value="Capturar">Solicitar</button>
               <p class="font-semibold bg-green-500 text-center text-white h-10 p-2 my-3 hidden" id="mensaje_exito">Solicitud Enviada Correctamente</p>
             </div>
           </form>
@@ -125,5 +173,4 @@
   </section>
   <script src="./main.js"></script>
 </body>
-
 </html>
