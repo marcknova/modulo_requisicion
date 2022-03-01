@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../public/css/style.css">
-  <link rel="stylesheet" href="../public/css/style2.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style2.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <title>Document</title>
 </head>
 
 <body class="bg-white">
-  <header class="bg-sky-400 shadow">
+  <header class="bg-black shadow">
     <div class="flex">
       <div class="h-20 p-3 w-1/2">
         <img class="h-full ml-5" src="../public/img/logo.png" alt="">
@@ -28,12 +29,12 @@
   </div>
   <section>
     <div class="flex my-10 mx-44 sombra">
-      <div class="w-4/11 h-full">
-        <img class="w-full h-screen" src="../public/img/1393679.jpg" alt="">
+      <div class="w-1/4 h-auto">
+        <img class="w-full h-1/2" src="../public/img/1393679.jpg" alt="">
       </div>
-      <div class="w-1/2">
+      <div class="w-3/4">
         <div class="my-8">
-          <form class="ml-10 -mr-7" id="formulario">
+          <form class="mx-10" id="formulario">
             <div class="containerData">
               <div class="grid grid-rows-2 grid-cols-2">
                 <div class="w-4/5" id="grupo_name">
@@ -47,7 +48,7 @@
                   autocomplete="off">
                   <p class="i_error text-xs my-2 input-error">El nombre solo puede contener letras.</p>
                 </div>
-                <div class="w-4/5" id="grupo_date">
+                <div class="w-full" id="grupo_date">
                   <label for="date"></label>
                   <input 
                   type="date" 
@@ -70,7 +71,7 @@
                   autocomplete="off">
                   <p class="i_error text-xs my-2 input-error">El telefono solo puede contener numeros y el maximo son 14 dígitos.</p>
                 </div>
-                <div class="w-4/5" id="grupo_extension">
+                <div class="w-full" id="grupo_extension">
                   <label for="extension"></label>
                   <input 
                   type="text" 
@@ -116,7 +117,7 @@
                 <p class="i_error text-xs my-2 input-error">El puesto solo puede contener letras.</p>
               </div>
             </div>
-            <!-- <div class="containerTable">
+            <div class="containerTable h-full">
               <div>
                 <h1 class="font-semibold">Tabla de productos</h1>
               </div>
@@ -156,14 +157,16 @@
                     <p class="i_error text-xs my-2 input-error">El nombre solo puede contener letras.</p>
                   </div>
                 </div>
-                <div>
-                  <button type="button" class="border-1 border-black rounded-lg w-20 h-9 font-semibold float-right hover:text-white hover:bg-black hover:border-0" onclick="Capturar()" >Agregar</button>
-                </div>
               </div>
-              <div class="productos" id="productos"></div>
-            </div> -->
+              <div class="w-100 h-12 p-1">
+                <button type="button" class="border-1 border-black rounded-lg w-20 h-9 font-semibold float-right hover:text-white hover:bg-black hover:border-0" id="bottonA" >Agregar</button>
+              </div>
+              <div class="productos" id="productos">
+                  <!--  -->
+              </div>
+            </div>
             <div class="my-5">
-              <button type="submit" class="border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="insertar" id="boton" value="Capturar">Solicitar</button>
+              <button type="submit" class="transition border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="insertar" id="boton" value="Capturar">Solicitar</button>
               <p class="font-semibold bg-green-500 text-center text-white h-10 p-2 my-3 hidden" id="mensaje_exito">Solicitud Enviada Correctamente</p>
             </div>
           </form>

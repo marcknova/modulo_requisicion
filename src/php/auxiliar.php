@@ -15,19 +15,19 @@
     <?php
     require_once "../connection/conexion.php";
     ?>
-    <header class="bg-green-600">
+    <header class="bg-black">
         <div class="h-20 p-3 max-w-lg">
-            <img class="h-full ml-5" src="../public//img/logo.png" alt="">
+            <img class="h-full ml-5" src="../../public/img/logo.png" alt="">
         </div>
     </header>
     <section>
         <div class="w-full text-center mt-14">
             <h1 class="text-4xl font-bold">Requisiciones Solicitadas</h1>
         </div>
-        <div class="min-w-full my-16 flex justify-center">
-            <div class="w-2/3 rounded-lg">
-                <table viewBox="0 0 5 5" class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-purple-400">
+        <div class="min-w-full my-16 flex justify-center divide-gray-200">
+            <div class="w-2/3 rounded-lg border-b border-gray-200 ">
+                <table viewBox="0 0 5 5" class="min-w-full divide-y divide-gray-200" id="formulario">
+                    <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nombre</th>
@@ -56,6 +56,7 @@
                         </tr>
                     <?php } ?>
                 </table>
+                <button id="reload" type="button">Refresr</button>
                 <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
                     <div>
                         <p class="text-sm leading-5 text-blue-700">
@@ -101,7 +102,7 @@
             </div>
         </div>
     </section>
-
+    <script src="../js/mainSrc.js"></script>
 </body>
 
 </html>

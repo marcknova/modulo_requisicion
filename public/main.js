@@ -1,16 +1,10 @@
 const formulario = document.getElementById('formulario');
 const inputs = document.querySelectorAll('#formulario input');
 
-const nombre = document.getElementById('i_name');
-const celular = document.getElementById('i_phone');
-const extension = document.getElementById('i_extension');
-const departamento = document.getElementById('i_department');
-const correo = document.getElementById('i_email');
-const puesto = document.getElementById('i_position');
-
 const cantidad = document.getElementById('i_total');
 const unidad = document.getElementById('i_unidad');
-const description = document.getElementById('i_description')
+const description = document.getElementById('i_description');
+const mostrar = document.getElementById('productos');
 
 const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
@@ -30,7 +24,6 @@ const campos = {
     // date: false,
     position: false,
     extension: false,
-
 }
 
 const validarFormulario = (e) => {
@@ -79,43 +72,107 @@ inputs.forEach((input) => {
 
 let arrayGuardar = []; 
 
-var Capturar = function(){
-    let mostrar = document.getElementById('productos');
-    n = 0
+// var Capturar = function(){
+//     let div = document.createElement('div');    
+//     console.log(first)
+//     let data = {
+//         cantidad: cantidad.value,
+//         unidad: unidad.value,
+//         description: description.value, 
+//     }
+
+//     if(arrayGuardar.length < 14){
+//         document.getElementById("bottonA").disabled = false;
+//         arrayGuardar.push(data);
+//     } else {
+//             document.getElementById("bottonA").disabled = true;
+//         console.log('Solo admite 15 Productos')
+//     }            
+
+//         arrayGuardar.forEach(data => {
+            
+//             div.setAttribute('id', `id`);
+//             div.innerHTML = `
+//             <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
+//             <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
+//             <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
+//             <div class="">
+//               <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
+//             </div>
+//         `
+//         });
+   
+//             mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black');
+//     }    
+
+
+const boton = document.getElementById('bottonA').addEventListener('click', () => {
+    let div = document.createElement('div');    
     let data = {
         cantidad: cantidad.value,
         unidad: unidad.value,
-        description: description.value,
+        description: description.value, 
     }
+
+    if(arrayGuardar.length < 14){
+        document.getElementById("bottonA").disabled = false;
         arrayGuardar.push(data);
-            arrayGuardar.map(data => {
-                mostrar.innerHTML = `<div class="flex mt-4" key=${data.cantidad}>
-                                        <div class="w-1/4 mr-3 text-center">${data.cantidad}</div>
-                                        <div class="w-1/4 mr-3 text-center">${data.unidad}</div>
-                                        <div class="w-4/5 text-center">${data.description}</div>
-                                    </div>`;
+    } else {
+            document.getElementById("bottonA").disabled = true;
+        console.log('Solo admite 15 Productos')
+    }            
+
+        for(let i = 1; i < 15; i++) {
+            arrayGuardar.forEach(data => {
+                div.setAttribute('id', `id${i}`);
+                div.innerHTML = `
+                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
+                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
+                <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
+                <div class="">
+                  <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
+                </div>
+            `
             });
-    }    
+        }
+   
+            mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black');
+} );
 
-formulario.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    if(campos.name && campos.department && campos.email && campos.phone && campos.position && campos.extension) {
-          
-        var formData = {
-            'name': nombre.value,
-            'position': puesto.value,
-            'department': departamento.value,
-            'email': correo.value,
-            'extension': extension.value,
-            'phone': celular.value, 
+const eliminar = () => {
+        div = document.getElementById('id2');
+            padre = div.parentNode;
+            padre.removeChild(div);
         }
 
-        const datos = new FormData(formulario);
+    formulario.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-            fetch('./metodoPost.php', {
+    if(campos.name && campos.department && campos.email && campos.extension && campos.phone && campos.position) {
+        
+        // var peticion = new XMLHttpRequest();
+        // peticion.open('POST', 'metodoPost.php');
+        // peticion.send(new FormData(formulario));
+        // peticion.onload = function() {
+        //     if(peticion.status != 200) {
+        //         console.log(`Error ${peticion.status}: ${peticion.statusText}`);
+        //     } else {
+        //         console.log(`Success ${peticion.status}`);
+        //     }
+        // }
+
+        fetch('./metodoPost.php', {
+            method: 'POST',
+            body: new FormData(formulario),
+        })
+            .then( res => res.json())
+            .then( data => {
+                console.log(data);
+            })
+
+        fetch('./metodoPost.php', {
             method: 'post',
-            body: JSON.stringify(formData),
+            body: JSON.stringify(arrayGuardar),
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -124,14 +181,16 @@ formulario.addEventListener('submit', (e) => {
             .then(res => res.json())
             .then(data => {
                 console.log('success', data);
-                formulario.reset();
             })
             .catch(e => console.log('error', e));
         
-            document.getElementById('mensaje_exito').classList.remove('hidden');
+        mostrar.innerHTML='';
         
-            setTimeout(() => {
-                document.getElementById('mensaje_exito').classList.add('hidden');
-            }, 3000);   
+        formulario.reset();
+
+        document.getElementById('mensaje_exito').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('mensaje_exito').classList.add('hidden');
+        }, 3000);
     }
-})
+});

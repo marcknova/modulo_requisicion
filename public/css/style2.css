@@ -85,3 +85,20 @@ td {
 .activo {
   display: block;
 }
+
+#info .productos div {
+  display: flex;
+  margin-top: 5px;
+}
+
+.b1 {
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.transition {
+  transition: ease-in-out 0.3s all;
+}
