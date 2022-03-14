@@ -1,44 +1,37 @@
 <?php
-
 require_once "../connection/conexion.php";
 
-$cnn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if (isset($_GET['id_usuario'])) {
+  $id = $_GET['id_usuario'];
+  $result = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
+  $result->execute(array($id));
 
-$id = $_GET['id'];
+  $result2 = $cnn->prepare("SELECT * FROM productos WHERE id_usuario = ?");
+  $result2->execute(array($id));
 
-$result = $cnn->prepare("SELECT * FROM requisiciones WHERE id = ?");
-$result->execute(array($id));
+  if (isset($_POST['actualizar'])) {
+    $estado = $_POST["estatus"];
+    foreach ($estado as $key) {
+      $consulta = $cnn->prepare("UPDATE productos SET 
+      estatus = :estatus, 
+      WHERE id_usuario = :$id");
+      $consulta->bindParam(':estatus', $key);
+      $consulta->execute();
+    }
+    // for ($i = 0; $i < count($estado); $i++) {
+    //   $consulta = $cnn->prepare("UPDATE productos SET 
+    //   estatus = :estatus, 
+    //   WHERE id_usuario = :$id");
 
-if (isset($_POST['actualizar'])) {
-
-  $nombre = $_POST['name'];
-  // $fecha = $_POST['date'];
-  $celular = $_POST['phone'];
-  $extension = $_POST['extension'];
-  $departamento = $_POST['department'];
-  $correo = $_POST['email'];
-  $puesto = $_POST['position'];
-
-  $consulta = "UPDATE requisiciones SET 
-    `nombreSolicitante`= :name, 
-    `puesto` = :position, 
-    `departamento` = :department, 
-    `extension` = :extension, 
-    `correo` = :email, 
-    `celular` = :phone 
-     WHERE `id` = $id";
-  $sql = $cnn->prepare($consulta);
-  $sql->bindParam(':name', $nombre, PDO::PARAM_STR, 25);
-  $sql->bindParam(':position', $puesto, PDO::PARAM_STR, 25);
-  $sql->bindParam(':department', $departamento, PDO::PARAM_STR, 25);
-  $sql->bindParam(':extension', $extension, PDO::PARAM_STR, 25);
-  $sql->bindParam(':email', $correo, PDO::PARAM_STR);
-  $sql->bindParam(':phone', $celular, PDO::PARAM_INT);
-
-  $sql->execute();
+    //   $consulta->bindParam(':estatus', $estado[$i]);
+    //   $consulta->execute();
+    // }
+  }
+} else {
+  echo 'Problemas con el recibo del ID';
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,22 +45,20 @@ if (isset($_POST['actualizar'])) {
 </head>
 
 <body>
-
-  <?php
-  foreach ($result as $row) { ?>
-    <header class="bg-black">
-      <div class="h-20 p-3 max-w-lg">
-        <img class="h-full ml-5" src="../../public/img/logo.png" alt="">
-      </div>
-    </header>
-    <div class="text-center p-3 text-4xl my-10 font-bold">
-      <h1>Modificar Requisicion</h1>
+  <header class="bg-black">
+    <div class="h-20 p-3 max-w-lg">
+      <img class="h-full ml-5" src="../../public/img/logo.png" alt="">
     </div>
-    <div class="my-10 mx-24 shadow-md">
-      <div class="w-full">
-        <div class="my-8">
-          <form class="p-3 method=" POST">
-            <div class="containerData">
+  </header>
+  <div class="text-center p-3 text-4xl my-10 font-bold">
+    <h1>Modificar Requisicion</h1>
+  </div>
+  <div class="my-10 mx-24 shadow-md">
+    <div class="w-full">
+      <div class="my-8">
+        <form class="p-3" method="POST" id="form">
+          <div class="containerData h-[515px]">
+            <?php foreach ($result as $row) { ?>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-left">
                 <div class="mb-12">
                   <label for="" class="font-medium text-base text-black block mb-3">
@@ -86,10 +77,10 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " name="nombreSolicitante" disabled="disabled">
                 </div>
               </div>
-              <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-right">
+              <div class=" w-full md:w-1/2 lg:w-1/2 px-4 float-right">
                 <div class="mb-12">
                   <label for="" class="font-medium text-base text-black block mb-3">
                     Fecha de Solicitud
@@ -107,7 +98,7 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " disabled="disabled">
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-right">
@@ -128,7 +119,7 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " name="celular" disabled="disabled">
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-right">
@@ -149,7 +140,7 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " name="extension" disabled="disabled">
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-right">
@@ -170,7 +161,7 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " name="departamento" disabled="disabled">
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-right">
@@ -190,7 +181,7 @@ if (isset($_POST['actualizar'])) {
                     focus:border-primary
                     active:border-primary
                     transition
-                    disabled:bg-[#F5F7FD] disabled:cursor-default" autocomplete="off">
+                    disabled:bg-[#F5F7FD] disabled:cursor-default" name="correo" autocomplete="off" disabled="disabled">
                 </div>
               </div>
               <div class="w-full md:w-1/2 lg:w-1/2 px-4 float-left">
@@ -211,26 +202,61 @@ if (isset($_POST['actualizar'])) {
                     active:border-primary
                     transition
                     disabled:bg-[#F5F7FD] disabled:cursor-default
-                    ">
+                    " name="puesto" disabled="disabled">
                 </div>
               </div>
+            <?php } ?>
+          </div>
+          <div class="containerProductos my-10">
+            <div class="mx-16">
+              <table class="w-full">
+                <tr class="p-1 shadow-sm h-10 border-b border-gray-200">
+                  <th>Cantidad</th>
+                  <th>Unidad</th>
+                  <th>Descripcion</th>
+                  <th>Aceptado/Rechazado</th>
+                </tr>
+                <?php foreach ($result2 as $key) { ?>
+                  <tr class="text-center h-10 p-2 divide-y divide-gray-200">
+                    <td><?php echo $key["cantidad"] ?> </td>
+                    <td><?php echo $key["unidad"] ?> </td>
+                    <td><?php echo $key["descripcion"] ?> </td>
+                    <td>
+                      <?php
+                      if ($key['estatus'] == null) { ?>
+                        <select class="outline-none text-center" name="estatus[]" id="estatus">
+                          <option value="">--Please choose an option--</option>
+                          <option value="aceptado">Aceptado</option>
+                          <option value="rechazado">Rechazado</option>
+                        </select>
+                      <?php } else { ?>
+                        <select class="outline-none text-center" name="estatus[]" id="estatus">
+                          <option value=""><?php echo $key["estatus"] ?></option>
+                          <option value="aceptado">Aceptado</option>
+                          <option value="rechazado">Rechazado</option>
+                        </select>
+                      <?php } ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+              </table>
             </div>
-            <div class="flex w-full my-6">
-              <div class="mx-10">
-                <button class="border-1 border-lime-500 w-24 h-10 font-semibold hover:bg-lime-500 hover:border-none hover:text-white" name="actualizar" type="submit">Modificar</button>
-              </div>
-              <div class="mx-12 marginT">
-                <a class="link" href="./auxiliar.php">Back</a>
-              </div>
+          </div>
+          <div class="flex w-full my-6">
+            <div class="mx-10">
+              <button class="border-1 border-lime-500 w-24 h-10 font-semibold hover:bg-lime-500 hover:border-none hover:text-white" name="actualizar" type="submit">Modificar</button>
             </div>
-          </form>
-        </div>
+            <div class="mx-12 marginT">
+              <a class="link" href="./proveedor.php">Back</a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  <?php } ?>
-
-
+  </div>
 </body>
-<!-- border-1 border-blue-500 w-24 h-10 text-center font-semibold hover:bg-blue-500 hover:border-none p-[6px] hover:text-white cursor-pointer -->
 
 </html>
+
+<?php
+?>

@@ -33,6 +33,10 @@ const campos = {
     extension: false,
 }
 
+function name(params) {
+    
+}
+
 const validarFormulario = (e) => {
     switch (e.target.name) {
         case "name":
@@ -79,76 +83,54 @@ inputs.forEach((input) => {
 
 let arrayGuardar = [];
 
-var Capturar = function () {
-    let div = document.createElement('div');
-
+const boton = document.getElementById('bottonA').addEventListener('click', () => {
+    let i = 0;
+    let div = document.createElement('div');    
     let data = {
+
         cantidad: cantidad.value,
         unidad: unidad.value,
-        description: description.value,
+        description: description.value, 
     }
 
-    if (arrayGuardar.length < 14) {
+    if(arrayGuardar.length < 14){
         document.getElementById("bottonA").disabled = false;
         arrayGuardar.push(data);
     } else {
-        document.getElementById("bottonA").disabled = true;
+            document.getElementById("bottonA").disabled = true;
         console.log('Solo admite 15 Productos')
-    }
+    }            
+
     arrayGuardar.forEach(data => {
-
-        div.setAttribute('id', `id`);
-        div.innerHTML = `
-            <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
-            <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
-            <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
-            <div class="">
-              <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
-            </div>
-        `
-    });
-
-    mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black');
-}
-
-// const boton = document.getElementById('bottonA').addEventListener('click', () => {
-//     let div = document.createElement('div');    
-//     let data = {
-//         cantidad: cantidad.value,
-//         unidad: unidad.value,
-//         description: description.value, 
-//     }
-
-//     if(arrayGuardar.length < 14){
-//         document.getElementById("bottonA").disabled = false;
-//         arrayGuardar.push(data);
-//     } else {
-//             document.getElementById("bottonA").disabled = true;
-//         console.log('Solo admite 15 Productos')
-//     }            
-
-//         for(let i = 1; i < 15; i++) {
-//             arrayGuardar.forEach(data => {
-//                 div.setAttribute('id', `id${i}`);
-//                 div.innerHTML = `
-//                 <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
-//                 <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
-//                 <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
-//                 <div class="">
-//                   <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
-//                 </div>
-//             `
-//             });
-//         }
-
-//             mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black');
-// } );
+                div.setAttribute('id', `${i++}`);
+                div.innerHTML = `
+                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
+                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
+                <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
+                <div class="">
+                  <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
+                </div>
+                `
+            });
+            mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black', 'delate');
+} );
 
 const eliminar = () => {
-    div = document.getElementById('id2');
-    padre = div.parentNode;
-    padre.removeChild(div);
-}
+    const div = document.getElementsByClassName('delate');
+    var newArray; 
+    for(var i=0;i<div.length;i++){
+        div[i].addEventListener("click", function()
+        {
+            var node = document.getElementById(`${this.id}`);
+                node.parentNode.removeChild(node);
+                newArray = arrayGuardar.slice(0, this.id);
+                console.log(newArray);
+        }); 
+        console.log(newArray);
+    // }
+    // padre = div.parentNode;
+    // padre.removeChild(div);
+}}
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -166,7 +148,6 @@ formulario.addEventListener('submit', (e) => {
             ...form,
             arrayGuardar
         }
-        console.log(JSON.stringify(objectData));
 
         fetch('./metodoPost.php', {
             method: 'POST',
@@ -179,23 +160,10 @@ formulario.addEventListener('submit', (e) => {
             .then(res => res.json())
             .then(data => {
                 console.log('Success form', data);
-            });
+            }).catch(e => console.log('error', e));
 
-        // fetch('./metodoPost.php', {
-        //     method: 'post',
-        //     body: JSON.stringify(arrayGuardar),
-        //     headers: {
-        //         Accept: "application/json",
-        //         "Content-Type": "application/json",
-        //     }
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log('Success array', data);
-        //     })
-        //     .catch(e => console.log('error', e));
-        // mostrar.innerHTML = '';
-        // formulario.reset();
+        mostrar.innerHTML = '';
+        formulario.reset();
 
         document.getElementById('mensaje_exito').classList.remove('hidden');
         setTimeout(() => {
@@ -203,3 +171,4 @@ formulario.addEventListener('submit', (e) => {
         }, 3000);
     }
 });
+
