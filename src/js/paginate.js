@@ -205,7 +205,7 @@
             let buttons = "<button href='#' class='py-2 px-3 ml-0 leading-tight mt-1 text-slate-600 bg-white rounded-l-lg border border-slate-500 hover:bg-gray-500 hover:text-white' onclick='paginate.sort("+(currentPage - 1)+")' "+prevDisabled+">Previous</button>"
 
             // let buttonNumberOfPage = "<input type='button' value='" + currentPage + ' - ' + numberOfPage + "' disabled>";
-            let buttonNumberOfPage = "<div class='hidden sm:flex-1 sm:flex sm:items-center sm:justify-between float-left py-2'><div> <p class='text-sm text-gray-700'>Showing<span class='font-medium mx-2'>"+ currentPage +"</span>to<span class='font-medium mx-2'>"+ numberOfPage +"</span>of<span class='font-medium mx-2'>97</span>results</p></div>"
+            let buttonNumberOfPage = "<br/>"
 
             for (let $i=1; $i<=numberOfPage;$i++){
                 if(numberOfPage > 10){

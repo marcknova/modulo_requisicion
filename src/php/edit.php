@@ -10,22 +10,16 @@ if (isset($_GET['id_usuario'])) {
   $result2->execute(array($id));
 
   if (isset($_POST['actualizar'])) {
-    $estado = $_POST["estatus"];
-    foreach ($estado as $key) {
-      $consulta = $cnn->prepare("UPDATE productos SET 
-      estatus = :estatus, 
-      WHERE id_usuario = :$id");
-      $consulta->bindParam(':estatus', $key);
+    $estado = $_POST['estatus'];
+
+    $consulta = $cnn->prepare("UPDATE productos SET estatus = :estatus WHERE id = :id");
+    foreach ($estado as $key => $val) {
+      $estatus = $val;
+      echo $lastId = $key;
+      $consulta->bindParam(':estatus', $estatus);
+      $consulta->bindParam(':id', $lastId, PDO::PARAM_INT);
       $consulta->execute();
     }
-    // for ($i = 0; $i < count($estado); $i++) {
-    //   $consulta = $cnn->prepare("UPDATE productos SET 
-    //   estatus = :estatus, 
-    //   WHERE id_usuario = :$id");
-
-    //   $consulta->bindParam(':estatus', $estado[$i]);
-    //   $consulta->execute();
-    // }
   }
 } else {
   echo 'Problemas con el recibo del ID';
@@ -226,14 +220,14 @@ if (isset($_GET['id_usuario'])) {
                       if ($key['estatus'] == null) { ?>
                         <select class="outline-none text-center" name="estatus[]" id="estatus">
                           <option value="">--Please choose an option--</option>
-                          <option value="aceptado">Aceptado</option>
-                          <option value="rechazado">Rechazado</option>
+                          <option value="Aceptado">Aceptado</option>
+                          <option value="Rechazado">Rechazado</option>
                         </select>
                       <?php } else { ?>
                         <select class="outline-none text-center" name="estatus[]" id="estatus">
                           <option value=""><?php echo $key["estatus"] ?></option>
-                          <option value="aceptado">Aceptado</option>
-                          <option value="rechazado">Rechazado</option>
+                          <option value="Aceptado">Aceptado</option>
+                          <option value="Rechazado">Rechazado</option>
                         </select>
                       <?php } ?>
                     </td>
@@ -244,7 +238,7 @@ if (isset($_GET['id_usuario'])) {
           </div>
           <div class="flex w-full my-6">
             <div class="mx-10">
-              <button class="border-1 border-lime-500 w-24 h-10 font-semibold hover:bg-lime-500 hover:border-none hover:text-white" name="actualizar" type="submit">Modificar</button>
+              <button class="border-1 border-green-500 w-24 h-10 font-semibold hover:bg-green-500 hover:border-none hover:text-white" name="actualizar" type="submit">Modificar</button>
             </div>
             <div class="mx-12 marginT">
               <a class="link" href="./proveedor.php">Back</a>
