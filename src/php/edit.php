@@ -12,10 +12,10 @@ if (isset($_GET['id_usuario'])) {
   if (isset($_POST['actualizar'])) {
     $estado = $_POST['estatus'];
 
-    $consulta = $cnn->prepare("UPDATE productos SET estatus = :estatus WHERE id = :id");
+    $consulta = $cnn->prepare("UPDATE productos SET estatus = :estatus WHERE id_producto = :id AND id_usuario = $id");
     foreach ($estado as $key => $val) {
       $estatus = $val;
-      echo $lastId = $key;
+      $lastId = $key;
       $consulta->bindParam(':estatus', $estatus);
       $consulta->bindParam(':id', $lastId, PDO::PARAM_INT);
       $consulta->execute();
@@ -79,7 +79,7 @@ if (isset($_GET['id_usuario'])) {
                   <label for="" class="font-medium text-base text-black block mb-3">
                     Fecha de Solicitud
                   </label>
-                  <input type="text" placeholder="Fecha de Solicitud" class="
+                  <input type="text" placeholder=<?php echo $row["fecha"] ?> class="
                     w-full
                     border-[1.5px] border-form-stroke
                     rounded-lg
@@ -91,6 +91,7 @@ if (isset($_GET['id_usuario'])) {
                     focus:border-primary
                     active:border-primary
                     transition
+                    text-black
                     disabled:bg-[#F5F7FD] disabled:cursor-default
                     " disabled="disabled">
                 </div>
@@ -216,8 +217,8 @@ if (isset($_GET['id_usuario'])) {
                     <td><?php echo $key["unidad"] ?> </td>
                     <td><?php echo $key["descripcion"] ?> </td>
                     <td>
-                      <?php
-                      if ($key['estatus'] == null) { ?>
+                      <!-- <?php
+                            if ($key['estatus'] == null) { ?>
                         <select class="outline-none text-center" name="estatus[]" id="estatus">
                           <option value="">--Please choose an option--</option>
                           <option value="Aceptado">Aceptado</option>
@@ -229,7 +230,7 @@ if (isset($_GET['id_usuario'])) {
                           <option value="Aceptado">Aceptado</option>
                           <option value="Rechazado">Rechazado</option>
                         </select>
-                      <?php } ?>
+                      <?php } ?> -->
                     </td>
                   </tr>
                 <?php } ?>

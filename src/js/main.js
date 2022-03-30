@@ -7,6 +7,9 @@ const correo = document.getElementById('i_email');
 const puesto = document.getElementById('i_position');
 const celular = document.getElementById('i_phone');
 const departamento = document.getElementById('i_department');
+const fecha = document.getElementById('i_date');
+const descripcion = document.getElementById('i_describe');
+const manpara = document.getElementById('i_manpara');
 
 const cantidad = document.getElementById('i_total');
 const unidad = document.getElementById('i_unidad');
@@ -17,7 +20,7 @@ const expresiones = {
     nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
     telefono: /^\d{7,14}$/,
-    // fecha: /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[1-9]|2[1-9])$/,
+    fecha: /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/,
     departamento: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
     puesto: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
     extension: /^\d{3,5}$/,
@@ -28,13 +31,9 @@ const campos = {
     phone: false,
     department: false,
     email: false,
-    // date: false,
+    date: false,
     position: false,
     extension: false,
-}
-
-function name(params) {
-    
 }
 
 const validarFormulario = (e) => {
@@ -43,7 +42,7 @@ const validarFormulario = (e) => {
             validarCampo(expresiones.nombre, e.target, 'name');
             break;
         case "date":
-            // validarCampo(expresiones.fecha, e.target, 'date');
+            validarCampo(expresiones.fecha, e.target, 'date');
             break;
         case "phone":
             validarCampo(expresiones.telefono, e.target, 'phone');
@@ -87,15 +86,15 @@ const boton = document.getElementById('bottonA').addEventListener('click', () =>
     let i = 0;
     let div = document.createElement('div');    
     let data = {
-
         cantidad: cantidad.value,
         unidad: unidad.value,
         description: description.value, 
     }
 
-    if(arrayGuardar.length < 14){
+    if(arrayGuardar.length < 14) {
         document.getElementById("bottonA").disabled = false;
         arrayGuardar.push(data);
+        i = 0;
     } else {
             document.getElementById("bottonA").disabled = true;
         console.log('Solo admite 15 Productos')
@@ -107,48 +106,39 @@ const boton = document.getElementById('bottonA').addEventListener('click', () =>
                 <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
                 <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
                 <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
-                <div class="">
-                  <button type="button" class="cursor-pointer mt-4" title="delete" onclick="eliminar()"><i class="fas fa-times-circle text-xl"></i></button>
-                </div>
+                  <button type="button" class="cursor-pointer mt-4" id="delete" title="delete" onclick="eliminar(this)"><i class="fas fa-times-circle text-xl"></i></button>
                 `
             });
-            mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black', 'delate');
-} );
+            mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black', 'borraruno');
+});
 
-const eliminar = () => {
-    const div = document.getElementsByClassName('delate');
-    var newArray; 
-    for(var i=0;i<div.length;i++){
-        div[i].addEventListener("click", function()
-        {
-            var node = document.getElementById(`${this.id}`);
-                node.parentNode.removeChild(node);
-                newArray = arrayGuardar.slice(0, this.id);
-                console.log(newArray);
-        }); 
-        console.log(newArray);
-    // }
-    // padre = div.parentNode;
-    // padre.removeChild(div);
-}}
+const eliminar = (boton) => {
+    var borrardiv = boton.parentNode;
+    document.getElementById("productos").removeChild(borrardiv);
+    arrayGuardar.splice(borrardiv.id, 1);
+    console.log(arrayGuardar);
+}
 
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (campos.name && campos.department && campos.email && campos.extension && campos.phone && campos.position) {
+    if (campos.name && campos.department && campos.email && campos.extension && campos.phone && campos.position && campos.date) {
         let form = {
             name: nombreUsuario.value,
+            date: fecha.value,
             extension: extension.value,
             phone: celular.value,
             department: departamento.value,
             email: correo.value,
-            position: puesto.value
+            position: puesto.value,
+            describe: descripcion.value,
+            manpara: manpara.value
         }
 
         const objectData = {
             ...form,
             arrayGuardar
         }
-
+        // console.log(objectData);
         fetch('./metodoPost.php', {
             method: 'POST',
             body: JSON.stringify(objectData),
@@ -163,6 +153,7 @@ formulario.addEventListener('submit', (e) => {
             }).catch(e => console.log('error', e));
 
         mostrar.innerHTML = '';
+        arrayGuardar = [];
         formulario.reset();
 
         document.getElementById('mensaje_exito').classList.remove('hidden');
@@ -171,4 +162,3 @@ formulario.addEventListener('submit', (e) => {
         }, 3000);
     }
 });
-

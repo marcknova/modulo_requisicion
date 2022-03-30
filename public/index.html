@@ -18,7 +18,7 @@
         <img class="h-full ml-5" src="../public/img/logo.png" alt="">
       </div>
       <div class="w-1/2">
-        <a href="../src/php/requisitionP.php" class="p-1 mt-4 mr-10 float-right">
+        <a href="../src/php/SolicitudesP.php" class="p-1 mt-4 mr-10 float-right">
           <button type="button" class="text-white rounded-xl font-semibold text-lg border-1 border-white hover:bg-white hover:text-black  w-52 h-10">Solicitudes realizadas</button> 
         </a>
       </div>
@@ -29,8 +29,8 @@
   </div>
   <section>
     <div class="flex my-10 mx-44 sombra">
-      <div class="w-1/4 h-auto">
-        <img class="w-full h-1/2" src="../public/img/1393679.jpg" alt="">
+      <div class="w-1/4 h-auto img">
+        <!-- <img class="w-full h-full" src="../public/img/268549.jpg" alt=""> -->
       </div>
       <div class="w-3/4">
         <div class="my-8">
@@ -51,13 +51,12 @@
                 <div class="w-full" id="grupo_date">
                   <label for="date"></label>
                   <input 
-                  type="date" 
+                  type="text" 
                   id="i_date" 
                   class="input outline-none" 
-                  placeholder="Fecha de Solicitud" 
-                  name="date" 
-                  autocomplete="off">
-                  <p class="i_error text-xs my-2 input-error">Favor de ingresar una fecha</p>
+                  placeholder="dd/mm/aaaa" 
+                  name="date">
+                  <p class="i_error text-xs my-2 input-error">Formato de fecha requerido: DD/MM/YYYY</p>
                 </div>
                 <div class="w-4/5" id="grupo_phone">
                   <label for="phone"></label>
@@ -116,6 +115,17 @@
                 autocomplete="off">
                 <p class="i_error text-xs my-2 input-error">El puesto solo puede contener letras.</p>
               </div>
+              <div class="position" id="grupo_manpara">
+                <label for="manpara"></label>
+                <input 
+                type="text" 
+                id="i_manpara" 
+                class="input outline-none" 
+                placeholder="Manpara" 
+                name="manpara" 
+                autocomplete="off">
+                <p class="i_error text-xs my-2 input-error">La Manpara solo puede contener letras.</p>
+              </div>
             </div>
             <div class="containerTable h-full">
               <div>
@@ -163,6 +173,16 @@
               </div>
               <div class="productos" id="productos">
                   <!--  -->
+              </div>
+            </div>
+            <div class="containerJustify">
+              <div class="flex h-full flex-col p-1 my-5">
+                <div class="my-3">
+                  <label class="font-semibold" for="descripcion">Descripcion de los productos</label>
+                </div>
+                <div> 
+                  <textarea name="Descripcion" id="i_describe" cols="87" rows="10" placeholder="Descripcion" class="outline-none input3"></textarea>
+                </div>
               </div>
             </div>
             <div class="my-5">
