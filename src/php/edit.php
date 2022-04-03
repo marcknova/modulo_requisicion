@@ -6,6 +6,9 @@ if (isset($_GET['id_usuario'])) {
   $result = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
   $result->execute(array($id));
 
+  $result3 = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
+  $result3->execute(array($id));
+
   $result2 = $cnn->prepare("SELECT * FROM productos WHERE id_usuario = ?");
   $result2->execute(array($id));
 
@@ -253,23 +256,27 @@ if (isset($_GET['id_usuario'])) {
             </div>
           </div>
           <div class="p-1 mx-10 my-5 containerEstado">
-            <p class="my-5 font-semibold">*Despues de haber confirmado cada uno de los productos y que los datos que proporciono el solicitante estan correctos solo queda aceptar o rechazar la requisicion para que esta pueda ser procesada.</p>
-            <span>Aceptar la requsicion:</span>
-            <?php foreach ($result as $row2) { ?>
-              <?php if ($row2['estado'] == null) { ?>
-                <select class="text-center outline-none" name="estadoFinal" id="estadoFinal">
-                  <option value="">--Please choose an option--</option>
-                  <option value="Aceptada">Si</option>
-                  <option value="Rechazada">No</option>
-                </select>
-              <?php } else { ?>
-                <select class="text-center outline-none" name="estadoFinal" id="estadoFinal">
-                  <option value=""><?php echo $row2["estado"] ?></option>
-                  <option value="Aceptada">Si</option>
-                  <option value="Rechazada">No</option>
-                </select>
+            <div>
+              <p class="my-5 font-semibold">*Despues de haber confirmado cada uno de los productos y que los datos que proporciono el solicitante estan correctos solo queda aceptar o rechazar la requisicion para que esta pueda ser procesada.</p>
+            </div>
+            <div>
+              <span>Estado de la requisicion:</span>
+              <?php foreach ($result3 as $row2) { ?>
+                <?php if ($row2['estado'] == null) { ?>
+                  <select class="text-center outline-none" name="estadoFinal" id="estadoFinal">
+                    <option value="">--Please choose an option--</option>
+                    <option value="Aceptada">Aceptada</option>
+                    <option value="Rechazada">Rechazada</option>
+                  </select>
+                <?php } else { ?>
+                  <select class="text-center outline-none" name="estadoFinal" id="estadoFinal">
+                    <option value=""><?php echo $row2["estado"] ?></option>
+                    <option value="Aceptada">Aceptada</option>
+                    <option value="Rechazada">Rechazada</option>
+                  </select>
+                <?php } ?>
               <?php } ?>
-            <?php } ?>
+            </div>
           </div>
           <div class="flex w-full my-6">
             <div class="mx-10">
