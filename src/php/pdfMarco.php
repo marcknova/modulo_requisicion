@@ -8,7 +8,7 @@ if (isset($_GET['id_usuario'])) {
   $result = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
   $result->execute(array($id));
 
-  $result2 = $cnn->prepare("SELECT * FROM productos WHERE id_usuario = ?");
+  $result2 = $cnn->prepare("SELECT * FROM productos WHERE id_usuario = ? AND estatus = 'Aceptado'");
   $result2->execute(array($id));
 }
 ?>
@@ -209,37 +209,37 @@ if (isset($_GET['id_usuario'])) {
       font-size: large;
     }
   </style>
-
-  <header style="margin-bottom: 8px;">
-    <div class="container">
-      <div class="inlineBlock">
-        <img class="img" src="../../public/img/logo.png" alt="">
-      </div>
-      <div class="inlineBlock floatRight">
-        <div class="m1" style="font-size: 13px;">
-          <label>Fecha de Solicitud:</label>
-          <input type="text">
+  <?php foreach ($result as $row) { ?>
+    <header style="margin-bottom: 8px;">
+      <div class="container">
+        <div class="inlineBlock">
+          <img class="img" src="../../public/img/logo.png" alt="">
         </div>
-        <div class="m2" style="font-size: 13px;">
-          <label>NUMERO DE FOLIO:</label>
-          <input type="text">
+        <div class="inlineBlock floatRight">
+          <div class="m1" style="font-size: 13px;">
+            <label>Fecha de Solicitud:</label>
+            <input type="text" value=<?php echo $row["fecha"] ?>>
+          </div>
+          <div class="m2" style="font-size: 13px;">
+            <label>NUMERO DE FOLIO:</label>
+            <input type="text">
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <!-- Tabla 1 -->
-    <table class="tabla">
-      <thead>
-        <!-- Columnas de la tabla -->
-        <tr style="height: 50px;">
-          <th style="font-size: 12px; margin: 25px 0 25px 0; padding: 1rem;" colspan="4">FORMATO DE REQUISICION</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Filas de la tabla -->
-        <?php foreach ($result as $row) { ?>
+    <main>
+      <!-- Tabla 1 -->
+      <table class="tabla">
+        <thead>
+          <!-- Columnas de la tabla -->
+          <tr style="height: 50px;">
+            <th style="font-size: 12px; margin: 25px 0 25px 0; padding: 1rem;" colspan="4">FORMATO DE REQUISICION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filas de la tabla -->
+
           <tr>
             <td width="28%">NOMBRE DEL SOLICITANTE:</td>
             <td width="75%" colspan="3"><?php echo $row["nombreSolicitante"] ?></td>
@@ -267,162 +267,157 @@ if (isset($_GET['id_usuario'])) {
             <td width="68%"><?php echo $row["celular"] ?></td>
           </tr>
         <?php } ?>
-      </tbody>
-    </table>
-  </main><br>
+        </tbody>
+      </table>
+    </main><br>
 
-  <main>
-    <!-- Tabla 2 -->
-    <table class="tabla">
-      <thead>
-        <!-- Columnas de la tabla -->
-        <tr>
-          <th style="font-size: 12px; padding: 1;" width="10%">Cantidad</th>
-          <th style="font-size: 12px; padding: 1;" width="10%">Unidad</th>
-          <th style="font-size: 12px; padding: 1;" width="80%">Descripcion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Filas de la tabla -->
-        <?php foreach ($result2 as $key) { ?>
+    <main>
+      <!-- Tabla 2 -->
+      <table class="tabla">
+        <thead>
+          <!-- Columnas de la tabla -->
           <tr>
-            <td style="text-align: center;"><?php echo $key["cantidad"] ?> </td>
-            <td style="text-align: center;"><?php echo $key["unidad"] ?> </td>
-            <td style="text-align: center;"><?php echo $key["descripcion"] ?> </td>
+            <th style="font-size: 12px; padding: 1;" width="10%">Cantidad</th>
+            <th style="font-size: 12px; padding: 1;" width="10%">Unidad</th>
+            <th style="font-size: 12px; padding: 1;" width="80%">Descripcion</th>
           </tr>
-          <?php if ($key <= 14) { ?>
-            <?php for ($i = 0; $i < 14; $i++) { ?>
+        </thead>
+        <tbody>
+          <!-- Filas de la tabla -->
+          <?php foreach ($result2 as $key) { ?>
+            <tr>
+              <td style="text-align: center;"><?php echo $key["cantidad"] ?> </td>
+              <td style="text-align: center;"><?php echo $key["unidad"] ?> </td>
+              <td style="text-align: center;"><?php echo $key["descripcion"] ?> </td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
 
-            <?php  } ?>
-          <?php } ?>
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+
+            <tr>
+              <td>C</td>
+              <td>C</td>
+              <td>C</td>
+            </tr>
+          <?php  } ?>
           <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
+            <td class="th" colspan="3"><b>Mampara</b></td>
           </tr>
 
           <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
+            <td class="detalles" colspan="3">C</td>
           </tr>
+        </tbody>
+      </table>
+      <h1 style="font-size: 14px; margin-top: -1.5px;">*Anotar especificaciones completas de Herramienta y/o Equipo.</h1>
+    </main>
 
+    <main>
+      <!-- Tabla 3 -->
+      <table class="tabla">
+        <thead>
+          <!-- Columnas de la tabla -->
           <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
+            <th style="font-size: 14px; padding: 1; text-align: left;">JUSTIFICACION DE LOS INSUMOS O SERVICIOS SOLICITADOS (INCLUIR NOMBRE DEL EVENTO)</th>
           </tr>
-
+        </thead>
+        <tbody>
+          <!-- Filas de la tabla -->
           <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
+            <td class="detalles">C</td>
           </tr>
+        </tbody>
+      </table>
+    </main> <br>
 
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-        <?php  } ?>
-        <tr>
-          <td class="th" colspan="3"><b>Mampara</b></td>
-        </tr>
-
-        <tr>
-          <td class="detalles" colspan="3">C</td>
-        </tr>
-      </tbody>
-    </table>
-    <h1 style="font-size: 14px; margin-top: -1.5px;">*Anotar especificaciones completas de Herramienta y/o Equipo.</h1>
-  </main>
-
-  <main>
-    <!-- Tabla 3 -->
-    <table class="tabla">
-      <thead>
-        <!-- Columnas de la tabla -->
-        <tr>
-          <th style="font-size: 14px; padding: 1; text-align: left;">JUSTIFICACION DE LOS INSUMOS O SERVICIOS SOLICITADOS (INCLUIR NOMBRE DEL EVENTO)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Filas de la tabla -->
-        <tr>
-          <td class="detalles">C</td>
-        </tr>
-      </tbody>
-    </table>
-  </main> <br>
-
-  <div class="names">
-    <div class="inlineBlock">
-      <label>C.</label>
-      <input type="text" name="nom_sol" required>
-      <label class="soli">SOLICITANTE</label>
+    <div class="names">
+      <div class="inlineBlock">
+        <label>C.</label>
+        <input type="text" name="nom_sol" required>
+        <label class="soli">SOLICITANTE</label>
+      </div>
+      <div class="inlineBlock floatRight">
+        <label>C.</label>
+        <input type="text" name="nom_aut" required>
+        <label class="soli">AUTORIZO</label>
+      </div>
     </div>
-    <div class="inlineBlock floatRight">
-      <label>C.</label>
-      <input type="text" name="nom_aut" required>
-      <label class="soli">AUTORIZO</label>
-    </div>
-  </div>
 
-  <!-- <div class="botones">
+    <!-- <div class="botones">
       <button class="save">Guardar</button>
       <button class="cancel">Cancelar</button>
     </div> -->

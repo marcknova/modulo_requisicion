@@ -37,6 +37,7 @@
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Departamento</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Ver</th>
                             <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"></th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Estado</th>
                         </tr>
                     </thead>
                     <?php foreach ($cnn->query("SELECT * FROM requisiciones ORDER BY id_usuario DESC") as $row) { ?>
@@ -54,6 +55,12 @@
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a href="./edit.php?id_usuario=<?php echo $row["id_usuario"] ?>" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                             </td>
+                            <?php
+                            if ($row['estado'] == null) { ?>
+                                <td class="px-6 py-4 whitespace-nowrap">Pendiente</td>
+                            <?php } else { ?>
+                                <td class="px-6 py-4 whitespace-nowrap"><?php echo $row["estado"] ?></td>
+                            <?php } ?>
                         </tr>
                     <?php } ?>
                 </table>
