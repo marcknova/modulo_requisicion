@@ -282,105 +282,143 @@ if (isset($_GET['id_usuario'])) {
             <th style="font-size: 12px; padding: 1;" width="80%">Descripcion</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
           <!-- Filas de la tabla -->
-          <?php foreach ($result2 as $key) { ?>
+          <?php
+          $array;
+          $i = 0;
+          foreach ($result2 as $key) {
+          ?>
             <tr>
               <td style="text-align: center;"><?php echo $key["cantidad"] ?> </td>
               <td style="text-align: center;"><?php echo $key["unidad"] ?> </td>
               <td style="text-align: center;"><?php echo $key["descripcion"] ?> </td>
             </tr>
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
+          <?php
+            $array[$i] = array($key["cantidad"], $key["unidad"], $key["descripcion"]);
+            $i++;
+          } ?>
+          <?php
+          // $datos = $result2->fetchAll(PDO::FETCH_ASSOC);
+          // $i = 0;
+          // $result = [];
+          // while ($i <= count($datos) - 1) {
+          //   foreach ($datos as $value) {
+          //     $arr[$i] = array(
+          //       'cantidad' => $value['cantidad'],
+          //       'unidad' => $value['unidad'],
+          //       'descripcion' => $value['descripcion']
+          //     );
+          //     $result += $arr;
+          //     array_push($result[$i]);
+          //   };
+          //   $i++;
+          // }
 
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
 
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-
-            <tr>
-              <td>C</td>
-              <td>C</td>
-              <td>C</td>
-            </tr>
-          <?php  } ?>
+          if (count($array) < 15) {
+            $value = count($array);
+            for ($i = $value; $i < 15; $i++) {
+              $contador[$i] = '   
+                  <tr>
+                  <td></td>
+                  <td>C</td>
+                  <td>C</td>
+                </tr>';
+              echo $contador[$i]++;
+            }
+          }
+          ?>
+          <?php  ?>
+          <!--
           <tr>
+            <td><?php var_dump($value); ?></td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr>
+
+          <tr>
+            <td>C</td>
+            <td>C</td>
+            <td>C</td>
+          </tr> -->
+
+          <!-- <tr>
             <td class="th" colspan="3"><b>Mampara</b></td>
-          </tr>
+          </tr> -->
 
-          <tr>
+          <!-- <tr>
             <td class="detalles" colspan="3">C</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <h1 style="font-size: 14px; margin-top: -1.5px;">*Anotar especificaciones completas de Herramienta y/o Equipo.</h1>
@@ -416,11 +454,6 @@ if (isset($_GET['id_usuario'])) {
         <label class="soli">AUTORIZO</label>
       </div>
     </div>
-
-    <!-- <div class="botones">
-      <button class="save">Guardar</button>
-      <button class="cancel">Cancelar</button>
-    </div> -->
 
 </body>
 

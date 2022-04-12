@@ -149,7 +149,7 @@ formulario.addEventListener('submit', (e) => {
                 "Content-Type": "application/json",
             }
         })
-            .then(res => res.json())
+            .then(res => res.text())
             .then(data => {
                 console.log('Success form', data);
             }).catch(e => console.log('error', e));

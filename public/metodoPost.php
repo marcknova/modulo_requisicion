@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 require "../src/connection/conexion.php";
 
 $json = file_get_contents('php://input');
