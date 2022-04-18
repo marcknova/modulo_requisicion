@@ -106,9 +106,9 @@ const boton = document.getElementById('bottonA').addEventListener('click', () =>
         document.getElementById("bottonA").disabled = false;
         columna.setAttribute('id', `${i++}`);
         columna.innerHTML = `
-        <td class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</td>
-        <td class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</td>
-        <td class="w-4/5 b1 p-1 my-2">${data.description}</td>
+        <td class="cantidad w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</td>
+        <td class="unidad w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</td>
+        <td class="description w-4/5 b1 p-1 my-2">${data.description}</td>
         <td class="border-none"><button type="button" class="cursor-pointer mt-4" id="delete" title="delete" onclick="eliminar(this)"><i class="fas fa-times-circle text-xl"></i></button></td>  
         `
         mostrar.appendChild(columna).classList.add('flex', 'border-b-1', 'border-black', 'borraruno', 'w-[670px]');
@@ -132,6 +132,15 @@ const eliminar = (boton) => {
 formulario.addEventListener('submit', (e) => {
     e.preventDefault();
     if (campos.name && campos.department && campos.email && campos.extension && campos.phone && campos.position && campos.date) {
+        document.querySelectorAll('.tablaProductos tbody tr').forEach(function(e){
+            let fila = {
+              cantidad: e.querySelector('.cantidad').innerText,
+              unidad: e.querySelector('.unidad').innerText,
+              description: e.querySelector('.description').innerText,
+            };
+            arrayGuardar.push(fila);
+          });
+          
         let form = {
             name: nombreUsuario.value,
             date: fecha.value,
@@ -148,7 +157,8 @@ formulario.addEventListener('submit', (e) => {
             ...form,
             arrayGuardar
         }
-        // console.log(objectData);
+        console.log(objectData);
+
         // fetch('./metodoPost.php', {
         //     method: 'POST',
         //     body: JSON.stringify(objectData),
