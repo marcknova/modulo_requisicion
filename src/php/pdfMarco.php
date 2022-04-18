@@ -31,6 +31,10 @@ if (isset($_GET['id_usuario'])) {
       height: 60px;
     }
 
+    .generador {
+      height: 13px;
+    }
+
     body {
       margin: 0;
       padding: 0px;
@@ -208,7 +212,28 @@ if (isset($_GET['id_usuario'])) {
       background-color: #CB4335;
       font-size: large;
     }
+
+    textarea {
+      border: 1px solid #EEEEEE;
+      box-shadow: 1px 1px 0 #DDDDDD;
+      display: block;
+      font-family: 'Marck Script', cursive;
+      font-size: 22px;
+      line-height: 50px;
+      margin: 2% auto;
+      padding: 11px 20px 0 70px;
+      resize: none;
+      height: 390px;
+      width: 530px;
+
+      background-image: -moz-linear-gradient(top, transparent, transparent 49px, #E7EFF8 0px), -moz-radial-gradient(4% 50%, circle closest-corner, #f5f5f5, #f5f5f5 39%, transparent 0%), -moz-radial-gradient(3.9% 46%, circle closest-corner, #CCCCCC, #CCCCCC 43.5%, transparent 0%);
+      background-image: -webkit-linear-gradient(top, transparent, transparent 49px, #E7EFF8 0), -webkit-radial-gradient(4% 50%, circle closest-corner, #f5f5f5, #f5f5f5 39%, transparent 0%), -webkit-radial-gradient(3.9% 46%, circle closest-corner, #cccccc, #cccccc 43.5%, transparent 0%);
+
+      -webkit-background-size: 100% 50px;
+      background-size: 100% 50px;
+    }
   </style>
+
   <?php foreach ($result as $row) { ?>
     <header style="margin-bottom: 8px;">
       <div class="container">
@@ -299,118 +324,19 @@ if (isset($_GET['id_usuario'])) {
             $i++;
           } ?>
           <?php
-          // $datos = $result2->fetchAll(PDO::FETCH_ASSOC);
-          // $i = 0;
-          // $result = [];
-          // while ($i <= count($datos) - 1) {
-          //   foreach ($datos as $value) {
-          //     $arr[$i] = array(
-          //       'cantidad' => $value['cantidad'],
-          //       'unidad' => $value['unidad'],
-          //       'descripcion' => $value['descripcion']
-          //     );
-          //     $result += $arr;
-          //     array_push($result[$i]);
-          //   };
-          //   $i++;
-          // }
-
-
           if (count($array) < 15) {
             $value = count($array);
             for ($i = $value; $i < 15; $i++) {
               $contador[$i] = '   
                   <tr>
-                  <td></td>
-                  <td>C</td>
-                  <td>C</td>
+                  <td class="generador"></td>
+                  <td class="generador"></td>
+                  <td class="generador"></td>
                 </tr>';
               echo $contador[$i]++;
             }
           }
           ?>
-          <?php  ?>
-          <!--
-          <tr>
-            <td><?php var_dump($value); ?></td>
-          </tr>
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr>
-
-          <tr>
-            <td>C</td>
-            <td>C</td>
-            <td>C</td>
-          </tr> -->
 
           <!-- <tr>
             <td class="th" colspan="3"><b>Mampara</b></td>
@@ -436,7 +362,16 @@ if (isset($_GET['id_usuario'])) {
         <tbody>
           <!-- Filas de la tabla -->
           <tr>
-            <td class="detalles">C</td>
+            <textarea name="" id="" cols="30" rows="10">
+            JavaScript is a high-level, often just-in-time compiled language that conforms to the ECMAScript standard.[14] It has dynamic typing, prototype-based object-orientation, and first-class functions. It is multi-paradigm, supporting event-driven, functional, and imperative programming styles. It has application programming interfaces (APIs) for working with text, dates, regular expressions, standard data structures, and the Document Object Model (DOM).
+
+The ECMAScript standard does not include any input/output (I/O), such as networking, storage, or graphics facilities. In practice, the web browser or other runtime system provides JavaScript APIs for I/O.
+
+JavaScript engines were originally used only in web browsers, but are now core components of some servers and a variety of applications. The most popular runtime system for this usage is Node.js.
+
+Although Java and JavaScript are similar in name, syntax, and respective standard libraries, the two languages are distinct and differ greatly in design.
+            </textarea>
+
           </tr>
         </tbody>
       </table>
@@ -454,6 +389,8 @@ if (isset($_GET['id_usuario'])) {
         <label class="soli">AUTORIZO</label>
       </div>
     </div>
+
+
 
 </body>
 

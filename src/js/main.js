@@ -14,7 +14,8 @@ const manpara = document.getElementById('i_manpara');
 const cantidad = document.getElementById('i_total');
 const unidad = document.getElementById('i_unidad');
 const description = document.getElementById('i_description');
-const mostrar = document.getElementById('productos');
+
+const mostrar = document.getElementById('listaP');
 
 const actualizar = document.getElementById('actualizarData');
 
@@ -86,39 +87,46 @@ let arrayGuardar = [];
 
 const boton = document.getElementById('bottonA').addEventListener('click', () => {
     let i = 0;
-    let div = document.createElement('div');    
+    let columna = document.createElement('tr');    
     let data = {
         cantidad: cantidad.value,
         unidad: unidad.value,
         description: description.value, 
     }
+    // if(arrayGuardar.length < 14) {
+    //     document.getElementById("bottonA").disabled = false;
+    //     arrayGuardar.push(data);
+    //     i = 0;
+    // } else {
+    //         document.getElementById("bottonA").disabled = true;
+    //     console.log('Solo admite 15 Productos')
+    // }            
 
-    if(arrayGuardar.length < 14) {
+    if(mostrar.rows.length < 15) {
         document.getElementById("bottonA").disabled = false;
-        arrayGuardar.push(data);
-        i = 0;
+        columna.setAttribute('id', `${i++}`);
+        columna.innerHTML = `
+        <td class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</td>
+        <td class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</td>
+        <td class="w-4/5 b1 p-1 my-2">${data.description}</td>
+        <td class="border-none"><button type="button" class="cursor-pointer mt-4" id="delete" title="delete" onclick="eliminar(this)"><i class="fas fa-times-circle text-xl"></i></button></td>  
+        `
+        mostrar.appendChild(columna).classList.add('flex', 'border-b-1', 'border-black', 'borraruno', 'w-[670px]');
     } else {
-            document.getElementById("bottonA").disabled = true;
-        console.log('Solo admite 15 Productos')
-    }            
-
-    arrayGuardar.forEach(data => {
-                div.setAttribute('id', `${i++}`);
-                div.innerHTML = `
-                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.cantidad}</div>
-                <div class="w-1/4 mr-3 b1 p-1 my-2">${data.unidad}</div>
-                <div class="w-4/5 b1 p-1 my-2">${data.description}</div>
-                  <button type="button" class="cursor-pointer mt-4" id="delete" title="delete" onclick="eliminar(this)"><i class="fas fa-times-circle text-xl"></i></button>
-                `
+        document.getElementById("bottonA").disabled = true;
+        console.log("Numero de datos ingresados llena");
+        document.getElementById("bottonA").disabled = false;
+    }
+        cantidad.value = ''
+        unidad.value = ''
+        description.value = '' 
             });
-            mostrar.appendChild(div).classList.add('flex', 'border-b-1', 'border-black', 'borraruno');
-});
 
 const eliminar = (boton) => {
-    var borrardiv = boton.parentNode;
-    document.getElementById("productos").removeChild(borrardiv);
-    arrayGuardar.splice(borrardiv.id, 1);
-    console.log(arrayGuardar);
+    var borrartr = boton.parentNode;
+    var row = borrartr.parentNode;
+    document.getElementById("listaP").deleteRow(row.rowIndex);
+  
 }
 
 formulario.addEventListener('submit', (e) => {
@@ -141,18 +149,18 @@ formulario.addEventListener('submit', (e) => {
             arrayGuardar
         }
         // console.log(objectData);
-        fetch('./metodoPost.php', {
-            method: 'POST',
-            body: JSON.stringify(objectData),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            }
-        })
-            .then(res => res.text())
-            .then(data => {
-                console.log('Success form', data);
-            }).catch(e => console.log('error', e));
+        // fetch('./metodoPost.php', {
+        //     method: 'POST',
+        //     body: JSON.stringify(objectData),
+        //     headers: {
+        //         Accept: "application/json",
+        //         "Content-Type": "application/json",
+        //     }
+        // })
+        //     .then(res => res.text())
+        //     .then(data => {
+        //         console.log('Success form', data);
+        //     }).catch(e => console.log('error', e));
 
         mostrar.innerHTML = '';
         arrayGuardar = [];

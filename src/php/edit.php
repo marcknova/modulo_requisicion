@@ -6,11 +6,11 @@ if (isset($_GET['id_usuario'])) {
   $result = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
   $result->execute(array($id));
 
-  $result3 = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
-  $result3->execute(array($id));
-
   $result2 = $cnn->prepare("SELECT * FROM productos WHERE id_usuario = ?");
   $result2->execute(array($id));
+
+  $result3 = $cnn->prepare("SELECT * FROM requisiciones WHERE id_usuario = ?");
+  $result3->execute(array($id));
 
   if (isset($_POST['actualizar'])) {
     $estado = $_POST['estatus'];
@@ -32,8 +32,6 @@ if (isset($_GET['id_usuario'])) {
 } else {
   echo 'Problemas con el recibo del ID';
 }
-
-
 
 ?>
 <!DOCTYPE html>
