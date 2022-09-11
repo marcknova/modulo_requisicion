@@ -39,7 +39,6 @@ if ($manpara != null) {
     $consulta->bindParam(':describe', $descripciongeneral);
 }
 
-
 if ($consulta->execute()) {
     $lastInsertId = $cnn->lastInsertId();
     $contador = 0;
